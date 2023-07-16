@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { Text, View, ScrollView, } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { Text, View, ScrollView, FlatList } from 'react-native';
 
 import Group from './group';
+import Item from './item';
 
 import ScheduleStyles from '../../styles/scheduleStyles';
 import TextStyles from '../../styles/textStyles';
+import ScheduleRetriever from '../../api/scheduleRetriever';
 
 // The main schedule component.
 // Adding this to a view will populate the full schedule
@@ -70,19 +72,34 @@ export const Schedule = () => {
         },
     ]);
 
+    const [schedule, setSchedule] = useState([]);
+
+    if (schedule.length == 0) {
+        ScheduleRetriever.getInstance().updateSchedule().then((response) => {setSchedule(response);});
+    }
 
     return (
         <View>
             <ScrollView contentContainerStyle = {ScheduleStyles.schedule}>
-                <Group></Group>
+                {
+                    schedule.map((prop, key) => {
+                        return <Group key = {key} month = {prop.month} date = {prop.date} dayOfWeek = {prop.dayOfWeek} shows = {prop.shows}/>
+                    })
+                }
+            </ScrollView>
+        </View>
+    );
+}
+
+/*
+<ScrollView contentContainerStyle = {ScheduleStyles.schedule}>
+                <Group ></Group>
                 <Group></Group>
                 <Group></Group>
                 <Group></Group>
                 <Group></Group>
                 <Group></Group>
             </ScrollView>
-        </View>
-    );
-}
+*/
 
 export default Schedule;

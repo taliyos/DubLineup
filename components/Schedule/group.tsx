@@ -9,78 +9,25 @@ import Item from './item';
 
 import ScheduleStyles from '../../styles/scheduleStyles';
 import TextStyles from '../../styles/textStyles';
+import ShowContainer from '../../interfaces/showContainer';
 
 // This is a Schedule item. It contains information about a single item on the schedule
-export const Group = () => {
-
-    const [testItems, setTestItems] = useState([
-        {
-            name: "Mushoku Tensei: Jobless Reincarnation",
-            platforms: [
-                {
-                    name: "Crunchyroll",
-                    link: "https://www.crunchyroll.com/series/G24H1N3MP/"
-                },
-                {
-                    name: "Funimation",
-                    link: "https://www.funimation.com/shows/mushoku-tensei-jobless-reincarnation"
-                }
-            ],
-            episode: 8,
-            releaseTime: "3:30PM EST"
-        },
-        {
-            name: "Demon Slayer: Swordsmith Village Arc",
-            platforms: [
-                {
-                    name: "Crunchyroll",
-                    link: "https://www.crunchyroll.com/series/GY5P48XEY/"
-                },
-                {
-                    name: "Funimation",
-                    link: "https://www.funimation.com/shows/demon-slayer-kimetsu-no-yaiba/"
-                }
-            ],
-            releaseTime: "4:30PM EST"
-        },
-        {
-            name: "Demon Slayer: Swordsmith Village Arc",
-            platforms: [
-                {
-                    name: "Crunchyroll",
-                    link: "https://www.crunchyroll.com/series/GY5P48XEY/"
-                },
-                {
-                    name: "Funimation",
-                    link: "https://www.funimation.com/shows/demon-slayer-kimetsu-no-yaiba/"
-                }
-            ],
-            releaseTime: "4:30PM EST"
-        },
-        {
-            name: "Demon Slayer: Swordsmith Village Arc",
-            platforms: [
-                {
-                    name: "Crunchyroll",
-                    link: "https://www.crunchyroll.com/series/GY5P48XEY/"
-                },
-                {
-                    name: "Funimation",
-                    link: "https://www.funimation.com/shows/demon-slayer-kimetsu-no-yaiba/"
-                }
-            ],
-            releaseTime: "4:30PM EST"
-        },
-    ]);
+export const Group = (props : ShowContainer) => {
 
     return (
         <View style = {ScheduleStyles.group}>
-            <CombinedDate/>
-            <FlatList contentContainerStyle = {ScheduleStyles.showContainer}
-                data = {testItems}
-                renderItem = {Item}
-                numColumns={3}
-                 />
+            <CombinedDate month = {props.month} date = {props.date} dayOfWeek = {props.dayOfWeek}/>
+            <View style = {ScheduleStyles.showContainer}>
+                <FlatList contentContainerStyle = {ScheduleStyles.shows}
+                    data = {props.shows}
+                    renderItem = {(data) => <Item name = {props.shows[data.index].name} 
+                                                    platforms = {props.shows[data.index].platforms}
+                                                    episode = {props.shows[data.index].episode}
+                                                    releaseDate = {props.shows[data.index].releaseDate}/>}
+                    numColumns= {3}
+                    scrollEnabled = {false}
+                />
+            </View>
             </View>
     );
 }

@@ -18,13 +18,9 @@ export default function App() {
     "MavenPro-Black": require("./assets/fonts/MavenPro/MavenPro-Black.ttf"),
   };
 
-  useEffect(() => {
-    async function loadFont() {
-      await Font.loadAsync(MavenProFonts);
-    }
+  const [fontsLoaded] = Font.useFonts(MavenProFonts);
 
-    loadFont();
-  }, []);
+  if (!fontsLoaded) return null;
 
   return (
     <View style={styles.container}>

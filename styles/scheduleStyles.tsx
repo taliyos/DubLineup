@@ -7,27 +7,20 @@ const ScheduleStyles = StyleSheet.create({
         paddingHorizontal: 2.5,
 
         flexDirection: "column",
-        justifyContent: "space-between",
+        alignSelf: "stretch",
         gap: 5
     },
     group: {
         // backgroundColor: "red",
 
         flexDirection: "column",
-        justifyContent: "center"
+        justifyContent: "center",
+        alignItems: "flex-start",
         
     },
     date: {
         // backgroundColor: "blue",
-
-        padding: 10,
-
-        flexDirection: "column",
-        justifyContent: "flex-start",
-
-        alignItems: "center",
-
-        marginTop: 15
+        
     },
     dayAndShow: {
         // flexDirection: "column"
@@ -38,16 +31,23 @@ const ScheduleStyles = StyleSheet.create({
     },
     combinedDate: {
         flexDirection: "row",
-        justifyContent: "center"
+        justifyContent: "center",
+        alignSelf: "center"
     },
     showContainer: {
-        // backgroundColor: "gray",
-        padding: 10,
-        flexGrow: 1,
         flexDirection: "column",
         justifyContent: "center",
 
-        marginTop: 5
+        alignSelf: "stretch",
+        alignItems: "center",
+
+        marginTop: 5,
+    },
+    shows: {
+        // backgroundColor: "gray",
+
+        justifyContent: "center",
+        minWidth: "88%"
     },
     item: {
         backgroundColor: "#ee5522",
